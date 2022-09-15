@@ -1,0 +1,46 @@
+<h1>New User</h1>
+
+<%# <%= render 'form', user: @user %> 
+<%= form_for @user, url: {action: "create"} do |form| %>
+
+   <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+   <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :phone %>
+    <%= form.text_field :phone %>
+  </div>
+
+<%= form.fields_for @address do |c| %>
+
+ <div class="field">
+    <%= label_tag("Pin_code") %>
+    <%= c.text_field(:pin_code) %>
+  </div>
+
+ <div class="field">
+    <%= label_tag("City") %>
+    <%= c.text_field(:city) %>
+  </div>
+<div class="field">
+    <%= label_tag("State") %>
+    <%= c.text_field(:state) %>
+  </div>
+  <div class="field">
+    <%= label_tag("Country") %>
+    <%= c.text_field(:country) %>
+  </div>
+
+<% end %>
+<br>
+<%= form.submit("submit") %>
+<% end %>
+
+<%= link_to 'Back', users_path %>

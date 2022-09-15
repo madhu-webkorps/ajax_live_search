@@ -1,0 +1,16 @@
+
+
+
+<div class="container mt-5 border p-5">
+
+<h3>search how many user rom specific city </h3><hr><br>
+    <%= form_with(user: @user, local: true) do |form| %>
+        <div class="field">
+            <%= form.label :Address %>
+            <%= form.text_field :address %>
+        </div>
+        <div class="actions">
+            <%= form.submit "search" ,class:"btn btn-outline-primary " %>
+        </div>
+    <% end %>
+</div>
