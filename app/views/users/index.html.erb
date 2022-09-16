@@ -1,6 +1,9 @@
 <div class="container">
 <p id="notice"><%= notice %></p>
  <h1>Users</h1>
+ <%= link_to 'New User', new_user_path  , class:"btn btn-outline-primary"%>
+ <br><br>
+
   <div class="row">
     <div class="col-md-6">
       <table class="table">
@@ -37,9 +40,17 @@
 
 <br>
 
-<%= link_to 'New User', new_user_path  , class:"btn btn-outline-primary"%>
-<%= link_to 'search user by address', address_count_path , class:"btn btn-outline-primary" %>
+<%# <%= link_to 'search user by address', address_count_path , class:"btn btn-outline-primary" %> 
 
+<h5>Search user  by address </h5><hr><br>
 
-
+<%= form_with url: "/search_user", method: :get do |form| %>
+        <div class="field">
+            <%= form.label :Address %>
+            <%= form.text_field :address %>
+        </div>
+        <div class="actions">
+            <%= form.submit "search" ,class:"btn btn-outline-primary " %>
+        </div>
+    <% end %>
 

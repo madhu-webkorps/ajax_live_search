@@ -2,6 +2,17 @@
 
 <%# <%= render 'form', user: @user %> 
 <%= form_for @user, url: {action: "create"} do |form| %>
+<% if @user.errors.any? || %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+        <% @user.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
    <div class="field">
     <%= form.label :name %>
@@ -36,6 +47,14 @@
   <div class="field">
     <%= label_tag("Country") %>
     <%= c.text_field(:country) %>
+  </div>
+  <div class="field">
+    <%= label_tag("District") %>
+    <%= c.text_field(:district) %>
+  </div>
+  <div class="field">
+    <%= label_tag("House no") %>
+    <%= c.text_field(:house_no) %>
   </div>
 
 <% end %>

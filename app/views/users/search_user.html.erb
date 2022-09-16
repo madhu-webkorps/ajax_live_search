@@ -2,6 +2,29 @@
 <% if @address_count > 0 %>
 <h4>  users from indore is : <%= @address_count%> </h4> 
 
+<p>number of users from all cities  <%= @count.keys%> <p>
+
+<table class="table">
+  <thead>
+
+    <tr>
+    <th>city</th>
+    <th>number of user</th>
+    </tr>
+   
+  </thead>
+
+  <tbody>
+    <% @count.each do |key , value|%>
+    <tr>
+    <td><%= key %></td>
+    <td><%= value %></td>
+    <%end%> 
+    </tr> 
+  </tbody>
+
+</table>
+
 <table class="table">
         <thead>
           <tr>
