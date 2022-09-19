@@ -25,12 +25,14 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     respond_to do |format|
+     
       if @user.save
         @address = Address.create({
                 city: params[:user][:address][:city] ,
                 country: params[:user][:address][:country] ,
                 pin_code: params[:user][:address][:pin_code] ,
-                state: params[:user][:address][:state] , 
+                state: params[:user][:address][:state] ,
+                district: params[:user][:address][:district] ,
                 user_id: @user.id 
               })
 
@@ -68,29 +70,18 @@ class UsersController < ApplicationController
     end
   end
 
-
-  # def address_count
-  #   # @address_count =  User.all.where(address: params[:address]).count
-  # end
-
-  # def address_count2
-   
-  #   user_ids =  Address.all.where(city: params[:address]).pluck(:user_id)
-
-  #   @users = User.all.where(id: user_ids)
-  #   @address_count =  Address.all.where(city: params[:address]).count 
-  #   @count = Address.group(:city).count
-  # end 
+  def search_address
   
-  def search_user 
-
-    user_ids =  Address.all.where(city: params[:address]).pluck(:user_id)
-    @users = User.all.where(id: user_ids)
-    @address_count =  Address.all.where(city: params[:address]).count 
-    @count = Address.group(:city).count
-
+    @address = Address.where("city LIKE ? OR country LIKE ? OR district LIKE ? OR state LIKE ? ", "%#{params[:address]}%","%#{params[:address]}%","%#{params[:address]}%","%#{params[:address]}%" )
+    
+    respond_to do |format|
+      format.js 
+      format.html 
+    end
   end
 
+
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user

@@ -1,0 +1,28 @@
+
+<% if @address.empty?%>
+ <h4> No record found </h4>
+ <%else%>
+ <table class="table table-border">
+ <thead>
+ <tr>
+ <th>Name</th>
+ <th>city</th>
+ <th>District</th>
+ <th>state</th>
+ <th>country</th>
+ </tr>
+ </thead>
+ <tbody>
+ 
+ <% @address.each  do |address| %>
+<tr>
+ <td><%= address.user.name%></td>
+ <td><%= highlight(address.city, params[:address])%></td>
+ <td><%= highlight(address.district, params[:address]) %></td>
+ <td><%= highlight(address.state , params[:address]) %></td>
+ <td><%= highlight(address.country , params[:address]) %></td>
+ </tr>
+
+ <%end%>
+ <%end%>
+ </tbody>

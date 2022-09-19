@@ -42,15 +42,32 @@
 
 <%# <%= link_to 'search user by address', address_count_path , class:"btn btn-outline-primary" %> 
 
-<h5>Search user  by address </h5><hr><br>
+    <h5>Search address </h5>
+    <input type = "text" name = "search" id = "search" class="form-control"  onkeyup = "search_user(id)" placeholder = "Enter city , country , district" >
 
-<%= form_with url: "/search_user", method: :get do |form| %>
-        <div class="field">
-            <%= form.label :Address %>
-            <%= form.text_field :address %>
-        </div>
-        <div class="actions">
-            <%= form.submit "search" ,class:"btn btn-outline-primary " %>
-        </div>
-    <% end %>
+  <div id = "result_dev">
+   <%# resulted values are show will be here %>
+  </div>
+
+</div>
+
+
+<script type="text/javascript">
+    function search_user(){
+      var query = document.getElementById("search").value
+      console.log(query);
+      if (query) {
+        $("#result_dev").show()
+       $.ajax({
+        url: "<%= search_address_path %>",
+        data: {'address': query}
+      })
+      } else {  
+        $("#result_dev").hide()
+        
+      }
+      
+    }
+
+</script>
 
